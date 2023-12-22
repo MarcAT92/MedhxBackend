@@ -128,6 +128,13 @@ userSchema.statics.resetpassword = async function (resetToken, newPassword, conf
       throw Error('Password not strong enough');
     }
 
+    // Check if the new password is the same as the current password
+    const isSamePassword = await bcrypt.compare(newPassword, user.password);
+
+    if (isSamePassword) {
+    throw Error('New password must be different from the current password');
+    }
+
     // Hash the new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
