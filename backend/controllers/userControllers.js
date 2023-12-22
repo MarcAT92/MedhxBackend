@@ -71,7 +71,7 @@ const signupUser = async (req, res) => {
       const user = await User.email(email);
 
       // create a token for password reset
-      const resetToken = createToken(user._id, process.env.RESET_PW, '20m' );
+      const resetToken = createToken(user._id, process.env.RESET_PW, '5m' );
 
       user.resetToken = resetToken;
       await user.save();
@@ -91,12 +91,14 @@ const signupUser = async (req, res) => {
      
  // Define email content
   const mailOptions = {
-    from: 'your_email@gmail.com',
+    from: `${process.env.EMAIL_ADD}`,
     to: email,
     subject: 'Password Reset',
     html: `
+      <p>Link Expires in (5) minutes:</p>
       <p>Click the following link to reset your password:</p>
       <a href="${process.env.HOST}/reset-password/${resetToken}">Click here</a>
+      <p>MedhxTT Support-Team</p>
     `,
   };
   
