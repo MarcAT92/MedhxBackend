@@ -95,7 +95,8 @@ const signupUser = async (req, res) => {
     to: email,
     subject: 'Password Reset',
     html: `
-      <p>Link Expires in (5) minutes:</p>
+      <h1>MedHxTT Password Reset</h1>
+      <h2>Link Expires in (5) minutes</h2>
       <p>Click the following link to reset your password:</p>
       <a href="${process.env.HOST}/reset-password/${resetToken}">Click here</a>
       <p>MedhxTT Support-Team</p>
